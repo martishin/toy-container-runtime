@@ -8,7 +8,6 @@ features:
 - **cgroups (pids)** → limit what a process can *use*
 - Minimal **mount setup** → `/proc` and a scratch `tmpfs`
 
----
 
 ## Why containers?
 
@@ -21,7 +20,6 @@ Containers are *just Linux processes* with:
 This makes them **portable** (ship a filesystem), **isolated** (can’t see host stuff), and **efficient** (no full VM per
 app). Real runtimes (runc/containerd/Docker) add a ton of safety and orchestration around these same primitives.
 
----
 
 ## What this project demonstrates
 
@@ -34,7 +32,6 @@ app). Real runtimes (runc/containerd/Docker) add a ton of safety and orchestrati
 
 You’ll literally see: a different hostname, PID 1, your own `/proc`, and a private tmpfs.
 
----
 
 ## How it works
 
@@ -48,7 +45,6 @@ You’ll literally see: a different hostname, PID 1, your own `/proc`, and a pri
     - (best-effort) put the process in a **pids cgroup** to cap forks
 - Finally, it `exec`s your command (`/usr/bin/python3 /opt/app/hello.py` or `/bin/bash`).
 
----
 
 ## Prerequisites
 
@@ -57,7 +53,6 @@ You’ll literally see: a different hostname, PID 1, your own `/proc`, and a pri
 - Docker (to build and export the rootfs)
 - In devcontainers: container needs `--privileged`, `SYS_ADMIN`, and the Docker socket mounted
 
----
 
 ## Running locally
 
@@ -73,7 +68,6 @@ make run
 make bash
 ```
 
----
 
 ## Verify you are in a container
 
@@ -86,7 +80,6 @@ ps -ef                      # PID namespace view (you're PID 1)
 cat /proc/self/status | sed -n '1,12p'
 ```
 
----
 
 ## Project structure
 
