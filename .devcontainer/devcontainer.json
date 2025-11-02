@@ -1,15 +1,18 @@
 {
-    "name": "toy-container-runtime-dev",
-    "dockerFile": "Dockerfile",
-    "runArgs": [
-        "--privileged",
-        "--cap-add=SYS_ADMIN",
-        "--security-opt=seccomp=unconfined",
-        "-v",
-        "/sys/fs/cgroup:/sys/fs/cgroup"
-    ],
-    "workspaceFolder": "/work",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/work,type=bind",
-    "remoteUser": "root",
-    "postCreateCommand": "make build rootfs || true"
+  "name": "toy-container-runtime-dev",
+  "dockerFile": "Dockerfile",
+  "runArgs": [
+    "--privileged",
+    "--cap-add=SYS_ADMIN",
+    "--security-opt=seccomp=unconfined",
+    "-v",
+    "/sys/fs/cgroup:/sys/fs/cgroup"
+  ],
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "workspaceFolder": "/work",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/work,type=bind",
+  "remoteUser": "root",
+  "postCreateCommand": "make build rootfs || true"
 }
